@@ -1,9 +1,3 @@
-# xssrock
-
-Here’s a **GitHub README.md** file with all the installation steps formatted properly. This will ensure that your users can easily set up and use **XSSRock - Automated XSS Scanner**.  
-
----
-
 # 🔥 XSSRock - Automated XSS Scanner  
 ### 🚀 Advanced XSS Detection Suite by RockSec  
 
