@@ -167,14 +167,7 @@ The developers are **not responsible** for any misuse of this tool.
 4. **Push to the branch** (`git push origin feature-branch`)  
 5. **Create a Pull Request**  
 
----
 
-## 📫 **Contact**
-📧 **Email:** rocksec@protonmail.com  
-🐦 **Twitter:** [@RockSec](https://twitter.com/rocksec)  
-🔗 **GitHub:** [RockSec](https://github.com/yourusername)  
-
----
 
 🔥 **Happy Hacking! Stay Safe!** 🚀  
 
