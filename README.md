@@ -166,3 +166,16 @@ The developers are **not responsible** for any misuse of this tool.
 🔥 **Happy Hacking! Stay Safe!** 🚀  
 
 ---
+
+
+
+
+
+
+
+cron job 
+
+```bash
+* * * * * /bin/bash -c 'source /home/ubuntu/.venv/bin/activate && python3 /home/ubuntu/xss/xss.py -u http://testphp.vulnweb.com/search.php?test=12 -p /home/ubuntu/xss/payload/xss.txt -w https://hooks.slack.com/services/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 -t 20 >> /home/ubuntu/xss_$(date +\%Y-\%m-\%d_\%H-\%M-\%S).log 2>&1'
+```
+
