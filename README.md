@@ -1,7 +1,28 @@
 # 🔥 XSSRock - Automated XSS Scanner  
 ### 🚀 Advanced XSS Detection Suite by RockSec  
 
-Here are the **Linux terminal** steps to install the necessary dependencies and set up your environment:
+###Set Up a Virtual Environment (Optional but Recommended)**
+```sh
+sudo apt install python3-venv -y  # Install virtualenv if not installed
+python3 -m venv env  # Create a virtual environment
+source env/bin/activate  # Activate the environment
+```
+
+**Before use you need to collect query parameters so use below tool to collect**
+
+```sh
+ git clone https://github.com/0xKayala/ParamSpider
+ cd ParamSpider
+ pip3 install -r requirements.txt
+```
+After install use below one liner to collect all query parameters
+
+```sh
+python3 paramspider.py --domain bugcrowd.com --exclude woff,css,js,png,svg,php,jpg --output params.txt && cat params.txt | httpx-toolkit > paramlive.txt
+```
+Use this query parameters to test find the xss vulnerability
+
+*Here are the **Linux terminal** steps to install the necessary dependencies and set up your environment:*
 
 ### **Step 1: Update Your System**
 Before installing anything, update your package list:
@@ -23,16 +44,7 @@ sudo apt install python3 python3-pip -y
 
 ---
 
-### **Step 3: Set Up a Virtual Environment (Optional but Recommended)**
-```sh
-sudo apt install python3-venv -y  # Install virtualenv if not installed
-python3 -m venv env  # Create a virtual environment
-source env/bin/activate  # Activate the environment
-```
-
----
-
-### **Step 4: Install Required Python Packages**
+### **Step 3: Install Required Python Packages**
 ```sh
 pip install argparse requests selenium
 ```
@@ -40,7 +52,7 @@ pip install argparse requests selenium
 
 ---
 
-### **Step 5: Install Chrome & ChromeDriver**
+### **Step 4: Install Chrome & ChromeDriver**
 1. **Install Google Chrome**
    ```sh
    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -68,7 +80,7 @@ pip install argparse requests selenium
      ```sh
      chromedriver --version
      ```
-### **Step 6: You're Ready to Go!**
+### **Step 5: You're Ready to Go!**
 
    ```bash
  git clone https://github.com/rocksec00/xssrock/
