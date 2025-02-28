@@ -1,116 +1,74 @@
 # 🔥 XSSRock - Automated XSS Scanner  
 ### 🚀 Advanced XSS Detection Suite by RockSec  
 
-<p align="center">
-    <img src="https://img.shields.io/badge/Made%20by-RockSec-blue.svg" alt="Made by RockSec">
-    <img src="https://img.shields.io/badge/Language-Python%203.7%2B-blue.svg">
-    <img src="https://img.shields.io/badge/Status-Active-green.svg">
-</p>
+Here are the **Linux terminal** steps to install the necessary dependencies and set up your environment:
 
-## 🚀 Features  
-✅ **Covers All XSS Types** (Reflected, Stored, DOM-Based, Blind, CSP Bypass, WAF Bypass)  
-✅ **Automated Payload Mutation & WAF Bypass**  
-✅ **Proxy & TOR Rotation** (Auto-switch on 403/429 errors)  
-✅ **Blind XSS Support** (via `https://xss.report/c/rocksec`)  
-✅ **Saves XSS Reports in JSON Format**  
+### **Step 1: Update Your System**
+Before installing anything, update your package list:
+```sh
+sudo apt update && sudo apt upgrade -y
+```
 
 ---
 
-## 🛠 **Installation Steps**  
-
-### ✅ **Step 1: Install Python & pip**  
-Ensure you have **Python 3.7+** and `pip` installed:  
-
-```bash
+### **Step 2: Install Python and pip**
+Check if Python is installed:
+```sh
 python3 --version
-pip3 --version
 ```
-
-If not installed, install them using:  
-
-#### **For Linux (Debian/Ubuntu)**  
-```bash
-sudo apt update && sudo apt install python3 python3-pip -y
-```
-
-#### **For macOS (Using Homebrew)**  
-```bash
-brew install python
-```
-
-#### **For Windows**  
-Download and install Python from 👉 [Python.org](https://www.python.org/downloads/).  
-Make sure to check **"Add Python to PATH"** during installation.
-
----
-
-### ✅ **Step 2: Clone the Repository**
-```bash
-git clone https://github.com/yourusername/XSSRock.git
-cd XSSRock
+If not, install it:
+```sh
+sudo apt install python3 python3-pip -y
 ```
 
 ---
 
-### ✅ **Step 3: Install Required Dependencies**  
-
-#### **Method 1: Install via `requirements.txt`**
-```bash
-pip3 install -r requirements.txt
-```
-
-#### **Method 2: Install Modules Manually**
-```bash
-pip3 install requests selenium argparse
+### **Step 3: Set Up a Virtual Environment (Optional but Recommended)**
+```sh
+sudo apt install python3-venv -y  # Install virtualenv if not installed
+python3 -m venv env  # Create a virtual environment
+source env/bin/activate  # Activate the environment
 ```
 
 ---
 
-### ✅ **Step 4: Install Google Chrome & ChromeDriver**  
-Since the script uses **Selenium** for **DOM-Based XSS detection**, install **Google Chrome** and **ChromeDriver**.
-
-#### **For Linux (Debian/Ubuntu)**  
-```bash
-sudo apt install google-chrome-stable
-wget https://chromedriver.storage.googleapis.com/$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver-linux64.zip
-unzip chromedriver-linux64.zip
-sudo mv chromedriver /usr/local/bin/
+### **Step 4: Install Required Python Packages**
+```sh
+pip install argparse requests selenium
 ```
-
-#### **For macOS (Using Homebrew)**
-```bash
-brew install --cask google-chrome
-brew install chromedriver
-```
-
-#### **For Windows**
-1. Download **Google Chrome** from [here](https://www.google.com/chrome/).
-2. Download **ChromeDriver** from 👉 [ChromeDriver Site](https://sites.google.com/chromium.org/driver/).
-3. Extract `chromedriver.exe` and place it in `C:\Windows\System32\`.
+> **Note:** The other modules like `random`, `time`, `json`, `base64`, `os`, `re`, `queue`, and `threading` are built-in and don’t require installation.
 
 ---
 
-### ✅ **Step 5: (Optional) Install TOR for Proxy Rotation**  
-If you want **TOR-based proxy rotation**, install TOR.
+### **Step 5: Install Chrome & ChromeDriver**
+1. **Install Google Chrome**
+   ```sh
+   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+   sudo apt install ./google-chrome-stable_current_amd64.deb -y
+   ```
+   Verify installation:
+   ```sh
+   google-chrome --version
+   ```
 
-#### **For Linux**  
-```bash
-sudo apt install tor
-sudo systemctl start tor
-```
-
-#### **For macOS**  
-```bash
-brew install tor
-brew services start tor
-```
-
-#### **For Windows**  
-Download and install TOR from 👉 [Tor Project](https://www.torproject.org/download/).
-
----
-
-## 🚀 **Usage**
+2. **Download and Install ChromeDriver**
+   - First, find your **Chrome version**:
+     ```sh
+     google-chrome --version
+     ```
+   - Visit the [ChromeDriver download page](https://chromedriver.chromium.org/downloads) and download the version that matches your Chrome version.
+   - Extract and move it to `/usr/local/bin`:
+     ```sh
+     wget https://chromedriver.storage.googleapis.com/<YOUR_VERSION>/chromedriver_linux64.zip
+     unzip chromedriver_linux64.zip
+     sudo mv chromedriver /usr/local/bin/
+     chmod +x /usr/local/bin/chromedriver
+     ```
+   - Verify installation:
+     ```sh
+     chromedriver --version
+     ```
+### **Step 6: You're Ready to Go!**
 Once everything is installed, run XSSRock using the following commands:
 
 ### 🔍 **Scan a Single URL**
@@ -176,6 +134,6 @@ The developers are **not responsible** for any misuse of this tool.
 cron job 
 
 ```bash
-* * * * * /bin/bash -c 'source /home/ubuntu/.venv/bin/activate && python3 /home/ubuntu/xss/xss.py -u http://testphp.vulnweb.com/search.php?test=12 -p /home/ubuntu/xss/payload/xss.txt -w https://hooks.slack.com/services/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 -t 20 >> /home/ubuntu/xss_$(date +\%Y-\%m-\%d_\%H-\%M-\%S).log 2>&1'
+* * * * * /bin/bash -c 'source /home/ubuntu/.venv/bin/activate && python3 path/to/xss.py -u http://testphp.vulnweb.com/search.php?test=12 -p /path/to/payload/file or-directory/  -w webhookurl  -t 20 >> path/to/saved/xss_$(date +\%Y-\%m-\%d_\%H-\%M-\%S).log 2>&1'
 ```
 
