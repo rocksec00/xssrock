@@ -110,9 +110,9 @@ pip install argparse requests selenium
    ```bash
    xssrock -h
 
-Once everything is installed, run XSSRock using the following commands: 
+**Once everything is installed, run XSSRock using the following commands:**
 
-Note: If you enable golbal access ignore **Python3**
+**Note:** If you enable golbal access ignore **Python3**
 
 ### 🔍 **Scan a Single URL**
 ```bash
