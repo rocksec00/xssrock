@@ -20,7 +20,7 @@ After install use below one liner to collect all query parameters
 ```sh
 python3 paramspider.py --domain bugcrowd.com --exclude woff,css,js,png,svg,php,jpg --output params.txt && cat params.txt | httpx-toolkit > paramlive.txt
 ```
-Use this query parameters to test find the xss vulnerability
+**Use this query parameters to test and find the xss vulnerability**
 
 *Here are the **Linux terminal** steps to install the necessary dependencies and set up your environment:*
 
