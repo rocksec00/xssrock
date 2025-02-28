@@ -126,6 +126,7 @@ python3 xssrock --proxy path/to/proxylist
 ```bash
 python3 xssrock -u "http://testphp.vulnweb.com/admin/?C=FUZZ" -w "https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
 ```
+Test webhook site - https://webhook.site/
 
 ---
 
