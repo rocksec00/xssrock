@@ -86,17 +86,17 @@ pip install argparse requests selenium
    For Move
    
    ```bash
-   mv singlejs /usr/local/bin
+   mv xssrock /usr/local/bin
    ```
    For Copy
    
       ```bash
-   cp singlejs /usr/local/bin
+   cp xssrock /usr/local/bin
    ```
    
 3. Help
    ```bash
-   singlejs -h
+   xssrock -h
 
 Once everything is installed, run XSSRock using the following commands: 
 Note: If you enable golbal access ignore **Python3**
