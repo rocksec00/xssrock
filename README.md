@@ -22,7 +22,7 @@ python3 paramspider.py --domain bugcrowd.com --exclude woff,css,js,png,svg,php,j
 ```
 **Use this query parameters to test and find the xss vulnerability**
 
-###*Here are the **Linux terminal** steps to install the necessary dependencies and set up your environment:*
+*Here are the **Linux terminal** steps to install the necessary dependencies and set up your environment:*
 
 ### **Step 1: Update Your System**
 Before installing anything, update your package list:
@@ -110,7 +110,7 @@ pip install argparse requests selenium
    ```bash
    xssrock -h
 
-**Once everything is installed, run XSSRock using the following commands:**
+###**Once everything is installed, run XSSRock using the following commands:**
 
 **Note:** If you enable golbal access ignore **Python3**
 
