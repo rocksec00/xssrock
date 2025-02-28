@@ -126,7 +126,7 @@ python3 xssrock -f urls.txt
 
 ### 🎯 **Use Custom Payloads** **(File or directory)**
 ```bash
-python3 xssrock -p payloads.txt
+python3 xssrock -p payloadsfile/or/path/to/payloads/directory
 ```
 
 ### 🎯 **Use Proxy** 
