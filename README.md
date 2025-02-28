@@ -81,7 +81,7 @@ python3 xssrock.py -u "http://example.com/vuln.php?search=test"
 python3 xssrock.py -f urls.txt
 ```
 
-### 🎯 **Use Custom Payloads**
+### 🎯 **Use Custom Payloads** **(File or directory)**
 ```bash
 python3 xssrock.py -p payloads.txt
 ```
