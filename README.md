@@ -69,26 +69,62 @@ pip install argparse requests selenium
      chromedriver --version
      ```
 ### **Step 6: You're Ready to Go!**
-Once everything is installed, run XSSRock using the following commands:
+
+   ```bash
+ git clone https://github.com/rocksec00/xssrock/
+ cd xssrock
+   ```
+
+
+1. Make the script executable:
+   ```bash
+   chmod +x xssrock
+   ```
+   
+2. If you want to Run Globally Move or Copy the script to `/usr/local/bin`:
+   
+   For Move
+   
+   ```bash
+   mv singlejs /usr/local/bin
+   ```
+   For Copy
+   
+      ```bash
+   cp singlejs /usr/local/bin
+   ```
+   
+3. Help
+   ```bash
+   singlejs -h
+
+Once everything is installed, run XSSRock using the following commands: 
+Note: If you enable golbal access ignore **Python3**
 
 ### 🔍 **Scan a Single URL**
 ```bash
-python3 xssrock.py -u "http://example.com/vuln.php?search=test"
+python3 xssrock -u "http://testphp.vulnweb.com/admin/?C=FUZZ"
 ```
 
 ### 📜 **Scan Multiple URLs from a File**
 ```bash
-python3 xssrock.py -f urls.txt
+python3 xssrock -f urls.txt
 ```
 
 ### 🎯 **Use Custom Payloads** **(File or directory)**
 ```bash
-python3 xssrock.py -p payloads.txt
+python3 xssrock -p payloads.txt
+```
+
+### 🎯 **Use Proxy** 
+
+```bash
+python3 xssrock --proxy path/yo/proxylist
 ```
 
 ### 🔄 **Enable Slack Notifications**
 ```bash
-python3 xssrock.py -u "http://example.com" -w "https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
+python3 xssrock -u "http://testphp.vulnweb.com/admin/?C=FUZZ" -w "https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
 ```
 
 ---
@@ -97,7 +133,7 @@ python3 xssrock.py -u "http://example.com" -w "https://hooks.slack.com/services/
 ```json
 {
     "timestamp": "20250225_123456",
-    "url": "http://example.com/vuln.php?search=test",
+    "url": "http://testphp.vulnweb.com/admin/?C=FUZZ",
     "parameter": "search",
     "payload": "<script>alert(1)</script>"
 }
