@@ -119,7 +119,7 @@ python3 xssrock -p payloads.txt
 ### 🎯 **Use Proxy** 
 
 ```bash
-python3 xssrock --proxy path/yo/proxylist
+python3 xssrock --proxy path/to/proxylist
 ```
 
 ### 🔄 **Enable Slack Notifications**
