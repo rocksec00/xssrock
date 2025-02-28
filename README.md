@@ -1,7 +1,7 @@
 # 🔥 XSSRock - Automated XSS Scanner  
 ### 🚀 Advanced XSS Detection Suite by RockSec  
 
-###Set Up a Virtual Environment (Optional but Recommended)**
+**Set Up a Virtual Environment (Optional but Recommended)**
 ```sh
 sudo apt install python3-venv -y  # Install virtualenv if not installed
 python3 -m venv env  # Create a virtual environment
