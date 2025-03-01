@@ -4,8 +4,8 @@
 **Set Up a Virtual Environment (Optional but Recommended)**
 ```sh
 sudo apt install python3-venv -y  # Install virtualenv if not installed
-python3 -m venv env  # Create a virtual environment
-source env/bin/activate  # Activate the environment
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
 **Before use you need to collect query parameters so use below tool to collect**
