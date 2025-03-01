@@ -18,7 +18,7 @@ source .venv/bin/activate
 After install use below one liner to collect all query parameters
 
 ```sh
-python3 paramspider.py --domain bugcrowd.com --exclude woff,css,js,png,svg,php,jpg --output params.txt && cat params.txt | httpx-toolkit > paramlive.txt
+python3 paramspider.py --domain bugcrowd.com --exclude woff,css,js,png,svg,php,jpg --output params.txt 
 ```
 **Use this query parameters to test and find the xss vulnerability**
 
