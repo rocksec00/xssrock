@@ -172,7 +172,7 @@ def try_bypass_waf(url, param, original_payload, proxies, webhook):
 
 # Slack Notification
 def slack_notify(webhook, url, payload):
-    slack_payload = {"text": f"🚨 *XSS Found!*\n🔗 URL: {url}\n💥 Payload: `{payload}`"}
+    slack_payload = {"text": f"🚨 *XSS Confirmed!*\n🔗 URL: {url}\n💥 Payload: `{payload}`"}
     try:
         response = requests.post(webhook, json=slack_payload)
         if response.status_code == 200:
