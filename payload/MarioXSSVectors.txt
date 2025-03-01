@@ -290,7 +290,7 @@ feed:feed:javAscript:javAscript:feed:alert('Top Page Location: '+document.locati
 </svg>//["'`-->]]>]</div>
 <div id="133"><!-- `<img/src=xx:xx onerror=alert(133)//--!>//["'`-->]]>]</div>
 <div id="134"><xmp>
-<%
+
 </xmp>
 <img alt='%></xmp><img src=xx:x onerror=alert(134)//'>
 
