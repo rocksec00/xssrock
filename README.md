@@ -47,6 +47,7 @@ sudo apt install python3 python3-pip -y
 ### **Step 3: Install Required Python Packages**
 ```sh
 pip install argparse requests selenium
+pip install webdriver-manager
 ```
 > **Note:** The other modules like `random`, `time`, `json`, `base64`, `os`, `re`, `queue`, and `threading` are built-in and don’t require installation.
 
